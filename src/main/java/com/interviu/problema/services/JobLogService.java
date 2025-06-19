@@ -29,11 +29,12 @@ public class JobLogService
             String jobName = parts[1];
             String status = parts[2];
             String pid = parts[3];
+            String key = jobName + "-" + pid;
 
             if (status.equals("START")) {
-                jobMap.put(pid, new JobDTO(pid, jobName, startDate, endTime));
-            } else if (status.equals("END") && jobMap.containsKey(pid)) {
-                jobMap.get(pid).setEndTime(startDate);
+                jobMap.put(key, new JobDTO(pid, jobName, startDate, endTime));
+            } else if (status.equals("END") && jobMap.containsKey(key)) {
+                jobMap.get(key).setEndTime(startDate);
             }
         }
         return jobMap.values().stream()
@@ -44,12 +45,12 @@ public class JobLogService
     public void generateReports(List<JobDTO> jobs) {
         System.out.println("Jobs > 5 minutes:");
         jobs.stream()
-                .filter(job -> job.getDurationMinutes() > 5)
+                .filter(job -> job.getDurationMinutes() >= 5)
                 .forEach(job -> System.out.println(job.getJobName() + " (" + job.getPid() + ") - " + job.getDurationMinutes() + " min"));
 
         System.out.println("\nJobs > 10 minutes:");
         jobs.stream()
-                .filter(job -> job.getDurationMinutes() > 10)
+                .filter(job -> job.getDurationMinutes() >= 10)
                 .forEach(job -> System.out.println(job.getJobName() + " (" + job.getPid() + ") - " + job.getDurationMinutes() + " min"));
     }
 }

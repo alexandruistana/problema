@@ -24,11 +24,13 @@ public class JobDTO
 
     public long getDurationMillis()
     {
+        if (startTime == null || endTime == null) return 0;
         return endTime.getTime() - startTime.getTime();
     }
 
     public long getDurationMinutes()
     {
+        if (startTime == null || endTime == null) return 0;
         return getDurationMillis() / (60 * 1000);
     }
 
