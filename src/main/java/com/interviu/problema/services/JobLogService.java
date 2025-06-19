@@ -26,9 +26,9 @@ public class JobLogService
             String[] parts = line.split(",", 4);
             Date startDate = formatter.parse(parts[0]);
             Date endTime = null;
-            String jobName = parts[1];
-            String status = parts[2];
-            String pid = parts[3];
+            String jobName = parts[1].trim();
+            String status = parts[2].trim();
+            String pid = parts[3].trim();
             String key = jobName + "-" + pid;
 
             if (status.equals("START")) {
