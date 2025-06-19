@@ -1,6 +1,5 @@
 package com.interviu.problema.services;
 
-import com.interviu.problema.model.Job;
 import com.interviu.problema.model.JobDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
